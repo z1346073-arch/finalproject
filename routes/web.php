@@ -3,8 +3,16 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing.pages.index');
+});
+Route::get('/detail', function () {
+    return view('landing.pages.detail');
+});
+
+Route::post('/contact', function () {
+    return back()->with('success', 'Message sent successfully!');
 });
 
 Route::get('/dashboard', function () {
@@ -18,3 +26,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
