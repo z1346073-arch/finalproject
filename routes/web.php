@@ -11,6 +11,19 @@ Route::get('/detail', function () {
     return view('landing.pages.detail');
 });
 
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.master');
+    })->name('admin.index');
+});
+
+
+
+
+
+
+
+
 Route::post('/contact', function () {
     return back()->with('success', 'Message sent successfully!');
 });
