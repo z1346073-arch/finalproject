@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ZoneController;
 
 Route::get('/', function () {
     return view('landing.pages.index');
@@ -15,15 +15,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.master');
     })->name('admin.index');
+    Route::resource('zones', ZoneController::class);
 });
-
-
-
-
-
-
-
-
 Route::post('/contact', function () {
     return back()->with('success', 'Message sent successfully!');
 });

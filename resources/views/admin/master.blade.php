@@ -37,7 +37,7 @@
                     <!-- Page header -->
                     <div class="mb-5">
                       @yield('content')
-                        <h1 class="mb-3 h2">Blank</h1>
+                        <h1 class="mb-3 h2"></h1>
                     </div>
                 </div>
             </div>
