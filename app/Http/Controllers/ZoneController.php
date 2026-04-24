@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Zone;
-use Illuminate\Support\Facades\Storage; 
+use Illuminate\Http\Request;
 
 class ZoneController extends Controller
 {
@@ -21,27 +20,28 @@ class ZoneController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
-            'price_range' => 'required',
-            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:200',
+            'description' => 'required|string',
+            'price_range' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
-            $validated['image'] = basename($imagePath);
+            $validatedData['image'] = $imagePath;
         }
 
-        Zone::create($validated);
+        Zone::create($validatedData);
 
-        return redirect()->route('zones.index')->with('success', 'Zone created successfully.');
+        return redirect()->route('admin.zones.index')->with('success', 'Zone created successfully.');
     }
 
     public function show($id)
     {
         $zone = Zone::findOrFail($id);
-        return view('admin.pages.zones.show', compact('zone'));
+        $otherzones = Zone::where('id', '!=', $id)->get();
+        return view('admin.pages.zones.show', compact('zone', 'otherzones'));
     }
 
     public function edit($id)
@@ -54,21 +54,21 @@ class ZoneController extends Controller
     {
         $zone = Zone::findOrFail($id);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price_range' => 'required|string|max:255',
-            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:200',
+            'description' => 'required|string',
+            'price_range' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
-            $validated['image'] = basename($imagePath);
+            $validatedData['image'] = $imagePath;
         }
 
-        $zone->update($validated);
+        $zone->update($validatedData);
 
-        return redirect()->route('zones.index')->with('success', 'Zone updated successfully.');
+        return redirect()->route('admin.zones.index')->with('success', 'Zone updated successfully.');
     }
 
     public function destroy($id)
@@ -76,7 +76,12 @@ class ZoneController extends Controller
         $zone = Zone::findOrFail($id);
         $zone->delete();
 
-        return redirect()->route('zones.index')->with('success', 'Zone deleted successfully.');
+        return redirect()->route('admin.zones.index')->with('success', 'Zone deleted successfully.');
     }
 
+    public function showZones($id)
+    {
+        $zone = Zone::findOrFail($id);
+        return view('landing.pages.detail-zone', compact('zone'));
+    }
 }

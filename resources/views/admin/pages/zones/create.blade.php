@@ -4,7 +4,7 @@
   
 <h1>Tambah Zona</h1>
 <hr>
-<form action="{{ route('zones.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.zones.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     
     <div class="mb-3">

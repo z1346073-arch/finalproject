@@ -1,30 +1,95 @@
 @extends('admin.master')
 
 @section('content')
-
-<h1 class="mb-3 h2">Blank</h1>
-
-<section class="mb-3">
-    <div class="card">
-        <div class="section-title text-center wow zoomIn">
-            <h2>Dashboard</h2>
-        </div></div>
-        <div class="row">
-            <p>Welcome to the admin dashboard!</p>
-            @forelse($zones as $zone)
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $value->name }}</h5>
-                            <p class="card-text">{{ $value->description }}</p>
-                        </div>
+     <div class="row row-cols-1 row-cols-xl-3 row-cols-md-3 mb-6 g-6">
+     <div class="col">
+        <!-- card -->
+        <div class="card card-lg">
+            <!-- card body -->
+            <div class="card-body d-flex flex-column gap-8">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="icon-shape icon-lg rounded-circle bg-warning-darker text-warning-lighter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M17 17h-11v-14h-2" />
+                            <path d="M6 5l14 1l-1 7h-13" />
+                        </svg>
+                    </div>
+                    <div>Zones</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center lh-1">
+                    <div class="fs-3 fw-bold">{{ $counter['zones'] }}</div>
+                    <div class="text-success small">
+                        <span><a href="{{ route('admin.zones.index') }}" class="btn btn-success">View All</a></span>
                     </div>
                 </div>
-            @empty
-                <p>No zones found.</p>
-            @endforelse
+            </div>
         </div>
     </div>
-</section>
+    <div class="col">
+        <!-- card -->
+        <div class="card card-lg">
+            <!-- card body -->
+            <div class="card-body d-flex flex-column gap-8">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="icon-shape icon-lg rounded-circle bg-success-darker text-success-lighter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-coin">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                            <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                            <path d="M12 7v10" />
+                        </svg>
+                    </div>
+                    <div>Attractions</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center lh-1">
+                    <div class="fs-3 fw-bold">{{ $counter['attractions'] }}</div>
+                    <div class="text-warning small">
+                        <span><a href="{{ route('admin.attractions.index') }}" class="btn btn-warning">View All</a></span>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <!-- card -->
+        <div class="card card-lg">
+            <!-- card body -->
+            <div class="card-body d-flex flex-column gap-8">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="icon-shape icon-lg rounded-circle bg-info-darker text-info-lighter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-circle">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                        </svg>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div>Reviews</div>
+                        <span class="text-danger">{{ $counter['unpublishedReviews'] }} Unpublished</span>
+
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center lh-1">
+                    <div class="fs-3 fw-bold">{{ $counter['publishedReviews'] }}</div>
+
+                    <div class="text-danger small">
+
+                        <a href="{{ route('admin.reviews.index') }}" class="btn btn-info">View Reviews</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

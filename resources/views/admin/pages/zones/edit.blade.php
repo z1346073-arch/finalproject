@@ -4,7 +4,7 @@
   
 <h1>Edit Zona</h1>
 <hr>
-<form action="{{ route('zones.update', $zone->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.zones.update', $zone->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     
