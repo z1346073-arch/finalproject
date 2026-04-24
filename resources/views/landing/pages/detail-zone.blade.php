@@ -31,7 +31,7 @@
 					<h3>Atraksi di Zona Ini</h3>
 					<ul>
 						@foreach($zone->attractions as $attraction)
-							<li><a href="{{ route('attractions.show', $attraction->id) }}">{{ $attraction->name }}</a></li>
+							<li><a href="{{ route('zone.show', ['zone' => $zone->id, 'attraction' => $attraction->id]) }}">{{ $attraction->name }}</a></li>
 						@endforeach
 					</ul>
 				</div>
